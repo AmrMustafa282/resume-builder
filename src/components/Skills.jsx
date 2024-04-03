@@ -21,7 +21,10 @@ const Skills = ({ handelSkills }) => {
   formData.frameworks = frameworks;
   formData.devtools = devtools;
   formData.libs = libs;
-  handelSkills(formData);
+   handelSkills(formData);
+   setTimeout(() => {     
+     navigate("/resume");
+   },[2000])
  };
 
  return (
@@ -48,7 +51,7 @@ const Skills = ({ handelSkills }) => {
     <div className="flex flex-wrap px-4 ">
      {languages &&
       languages.map((e) => (
-       <span className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded text-black">
+       <span key={e} className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded text-black">
         {e}
        </span>
       ))}
@@ -74,7 +77,7 @@ const Skills = ({ handelSkills }) => {
     <div className="flex flex-wrap px-4 ">
      {frameworks &&
       frameworks.map((e) => (
-       <span className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded text-black">
+       <span key={e} className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded text-black">
         {e}
        </span>
       ))}
@@ -100,7 +103,7 @@ const Skills = ({ handelSkills }) => {
     <div className="flex flex-wrap px-4 ">
      {devtools &&
       devtools.map((e) => (
-       <span className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded text-black">
+       <span key={e} className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded text-black">
         {e}
        </span>
       ))}
@@ -126,7 +129,7 @@ const Skills = ({ handelSkills }) => {
     <div className="flex flex-wrap px-4 ">
      {libs &&
       libs.map((e) => (
-       <span className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded text-black">
+       <span key={e} className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded text-black">
         {e}
        </span>
       ))}
@@ -136,7 +139,7 @@ const Skills = ({ handelSkills }) => {
      className="mt-12"
      onClick={() => {
       handelSkillsData();
-      navigate("/experience");
+      
      }}
     >
      Finish

@@ -1,18 +1,23 @@
 import React from 'react'
 import { useRef } from "react";
 import generatePDF from "react-to-pdf";
-import Resume from "./components/Resume";
+import Resume from './Resume';
+import { Button } from './ui/button';
 
-const Download = () => {
+
+const Download = ({formData}) => {
   const targetRef = useRef();
 
   return (
-   <div>
-    <button onClick={() => generatePDF(targetRef, { filename: "page.pdf" })}>
+   <div className="container">
+    <Button
+     className=" block ml-auto"
+     onClick={() => generatePDF(targetRef, { filename: "resume.pdf" })}
+    >
      Download PDF
-    </button>
-    <div ref={targetRef} className="bg-gray-100 py-4">
-     <Resume />
+    </Button>
+    <div ref={targetRef} className="py-4 border mt-8">
+        <Resume formData={formData} />
     </div>
    </div>
   );

@@ -3,11 +3,10 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useNavigate } from "react-router-dom";
 
-const Experience = ({ setExperienceArray }) => {
+const Experience = ({ handelExperiencesData, data }) => {
  const navigate = useNavigate();
  const [formData, setformData] = useState({});
  const [items, setItems] = useState({});
-
 
  const title = useRef(null);
  const name = useRef(null);
@@ -19,20 +18,15 @@ const Experience = ({ setExperienceArray }) => {
  const iFour = useRef(null);
 
  const handelSubmit = () => {
-   // setformData({ ...formData, items: items });
-   formData.items = items;
-  //  handelExperiencelData(formData);
-  setExperienceArray((prev) => [...prev, formData]);
-  //  console.log(formData)
-  //  navigate('/projects')
+  formData.items = items;
+  handelExperiencesData({ ...data.experience, formData });
  };
- //  console.log(items)
 
  const clear = () => {
   title.current.value = "";
   name.current.value = "";
   start.current.value = "";
-  end.current.value = '';
+  end.current.value = "";
   iOne.current.value = "";
   iTwo.current.value = "";
   iThree.current.value = "";
@@ -115,7 +109,7 @@ const Experience = ({ setExperienceArray }) => {
      >
       Add
      </Button>
-     <Button onClick={() => navigate('/projects')}>Next</Button>
+     <Button onClick={() => navigate("/projects")}>Next</Button>
     </div>
    </div>
   </>

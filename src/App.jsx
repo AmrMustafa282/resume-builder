@@ -8,28 +8,45 @@ import Personal from "./components/Personal";
 import Experience from "./components/Experience";
 import Projects from "./components/Projects";
 import Skills from "./components/Skills";
+import Download from "./components/Download";
 
 function App() {
-  const [formData, setFormData] = useState({});
-  const [experienceArray, setExperienceArray] = useState([])
-  const [projectsArray, setProjectsArray] = useState([]);
-  
+ const [formData, setFormData] = useState(() => {
+  if (localStorage.getItem("resume"))
+   return JSON.parse(localStorage.getItem("resume"));
+   return {
+     personal: {},
+     projects: [],
+     experience: [],
+     education: [],
+     skills: {}
+  };
+ });
+
 
  const handelPersonalData = (personalData) => {
   setFormData({ ...formData, personal: personalData });
-};
-const handelSkills = (skills) => {
-    setFormData({ ...formData, skills: skills });
-  }
-  
-useEffect(() => {
-  setFormData({ ...formData, experience: experienceArray });
-}, [experienceArray])
-  
-useEffect(() => {
-  setFormData({ ...formData, projects: projectsArray });
-},[projectsArray])
-console.log(formData)
+ };
+ const handelSkills = (skills) => {
+  setFormData({ ...formData, skills: skills });
+ };
+
+  const handelProjectsData = (projectsData) => {
+  setFormData({ ...formData, projects: [...formData.projects, projectsData] });
+ };
+ const handelExperiencesData = (experienceData) => {
+  setFormData({
+   ...formData,
+   experience: [...formData.experience, experienceData],
+  });
+ };
+
+ useEffect(() => {
+  localStorage.setItem("resume", JSON.stringify(formData));
+ }, [formData]);
+
+ console.log(formData);
+
  return (
   <BrowserRouter>
    <Header />
@@ -42,12 +59,15 @@ console.log(formData)
     <Route path="/skills" element={<Skills handelSkills={handelSkills} />} />
     <Route
      path="/experience"
-     element={<Experience setExperienceArray={setExperienceArray} />}
+         element={<Experience handelExperiencesData={handelExperiencesData} data={ formData} />}
     />
     <Route
      path="/projects"
-     element={<Projects setProjectsArray={setProjectsArray} />}
+     element={
+      <Projects handelProjectsData={handelProjectsData} data={formData} />
+     }
     />
+    <Route path="/resume" element={<Download formData={formData} />} />
    </Routes>
   </BrowserRouter>
  );
