@@ -2,6 +2,15 @@ import React, { useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import {
+ Breadcrumb,
+ BreadcrumbItem,
+ BreadcrumbLink,
+ BreadcrumbList,
+ BreadcrumbPage,
+ BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const Experience = ({ handelExperiencesData, data }) => {
  const navigate = useNavigate();
@@ -19,7 +28,8 @@ const Experience = ({ handelExperiencesData, data }) => {
 
  const handelSubmit = () => {
   formData.items = items;
-  handelExperiencesData({ ...data.experience, formData });
+   handelExperiencesData({ ...data.experience, formData });
+   toast.success("Experience added .");
  };
 
  const clear = () => {
@@ -34,6 +44,27 @@ const Experience = ({ handelExperiencesData, data }) => {
  };
  return (
   <>
+   <div className="container">
+    <Breadcrumb>
+     <BreadcrumbList>
+      <BreadcrumbItem>
+       <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+       <BreadcrumbLink href="/personal">Personal</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+       <BreadcrumbLink href="/education">Education</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+       <BreadcrumbPage>Experience</BreadcrumbPage>
+      </BreadcrumbItem>
+     </BreadcrumbList>
+    </Breadcrumb>
+   </div>
    <div className="h-[90vh]  flex flex-col justify-center gap-12  mx-auto  container">
     <h1 className="text-center text-4xl font-bold">Profiessional Experience</h1>
     <div className="grid grid-cols-2 gap-8 w-full mb-6">

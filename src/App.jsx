@@ -10,6 +10,7 @@ import Projects from "./components/Projects";
 import Skills from "./components/Skills";
 import Download from "./components/Download";
 import Educations from "./components/Education";
+import { Toaster } from "./components/ui/sonner";
 
 function App() {
  const [formData, setFormData] = useState(() => {
@@ -60,9 +61,14 @@ function App() {
     <Route path="/" element={<Home />} />
     <Route
      path="/personal"
-     element={<Personal handelPersonalData={handelPersonalData} />}
+     element={
+      <Personal handelPersonalData={handelPersonalData} data={formData} />
+     }
     />
-    <Route path="/skills" element={<Skills handelSkills={handelSkills} />} />
+    <Route
+     path="/skills"
+     element={<Skills handelSkills={handelSkills} data={formData} />}
+    />
     <Route
      path="/experience"
      element={
@@ -75,10 +81,7 @@ function App() {
     <Route
      path="/education"
      element={
-      <Educations
-       handelEducationData={handelEducationData}
-       data={formData}
-      />
+      <Educations handelEducationData={handelEducationData} data={formData} />
      }
     />
     <Route
@@ -89,6 +92,7 @@ function App() {
     />
     <Route path="/resume" element={<Download formData={formData} />} />
    </Routes>
+   <Toaster position="top-center" richColors  />
   </BrowserRouter>
  );
 }

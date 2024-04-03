@@ -2,6 +2,15 @@ import React, { useRef, useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import {
+ Breadcrumb,
+ BreadcrumbItem,
+ BreadcrumbLink,
+ BreadcrumbList,
+ BreadcrumbPage,
+ BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const Experience = ({ handelProjectsData ,data }) => {
  const navigate = useNavigate();
@@ -17,7 +26,8 @@ const Experience = ({ handelProjectsData ,data }) => {
 
   const handelSubmit = () => {
     formData.items = items;
-    handelProjectsData({...data.projects, formData});
+    handelProjectsData({ ...data.projects, formData });
+    toast.success("Project added .");
  };
 
  const clear = () => {
@@ -30,6 +40,31 @@ const Experience = ({ handelProjectsData ,data }) => {
  };
  return (
   <>
+   <div className="container">
+    <Breadcrumb>
+     <BreadcrumbList>
+      <BreadcrumbItem>
+       <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+       <BreadcrumbLink href="/personal">Personal</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+       <BreadcrumbLink href="/education">Education</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+       <BreadcrumbLink href="/experience">Experience</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+       <BreadcrumbPage>Projects</BreadcrumbPage>
+      </BreadcrumbItem>
+     </BreadcrumbList>
+    </Breadcrumb>
+   </div>
    <div className="h-[90vh]  flex flex-col justify-center gap-12  mx-auto  container">
     <h1 className="text-center text-4xl font-bold"> Projects</h1>
     <div className="grid grid-cols-2 gap-8 w-full mb-6">
@@ -43,9 +78,7 @@ const Experience = ({ handelProjectsData ,data }) => {
       ref={name}
      />
      <Input
-      onChange={(e) =>
-       setformData({ ...formData, techStack: e.target.value })
-      }
+      onChange={(e) => setformData({ ...formData, techStack: e.target.value })}
       placeholder="Tech Stack (Python, Flask, React, PostgreSQL, Docker)"
       type="text"
       className="col-span-1 "
