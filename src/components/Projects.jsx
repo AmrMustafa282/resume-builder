@@ -31,7 +31,7 @@ const Experience = ({ handelProjectsData ,data }) => {
  return (
   <>
    <div className="h-[90vh]  flex flex-col justify-center gap-12  mx-auto  container">
-    <h1 className="text-center text-4xl font-bold">Profiessional Experience</h1>
+    <h1 className="text-center text-4xl font-bold"> Projects</h1>
     <div className="grid grid-cols-2 gap-8 w-full mb-6">
      <Input
       onChange={(e) =>

@@ -4,9 +4,9 @@ import { MdEmail, MdPhone } from "react-icons/md";
 
 function Resume({ formData }) {
  // const [skills, setSkills] = useState(["javascript"]);
- const { personal, experience, projects, skills } = formData;
+ const { personal, experience, projects, skills, education } = formData;
  return (
-  <div className="container mx-auto px-4 py-8">
+  <div className="container mx-auto px-4 py-8 ">
    {personal && (
     <header className="flex flex-col items-center mb-8">
      <h1 className="text-3xl font-bold mb-2">{personal.fullName}</h1>
@@ -39,46 +39,40 @@ function Resume({ formData }) {
    <div className="px-12">
     <section className="mb-8">
      <h2 className="text-2xl font-bold text-start">Education</h2>
-     <span className="w-full h-[2px] bg-gray-500 block my-1"></span>
-     <div className="space-y-2 px-4">
-      <div className="my-1">
-       <div className="flex justify-between">
-        <h3 className="font-bold">Southwestern University</h3>
-        <p>Georgetown, TX</p>
+     <hr className="mt-4 "></hr>
+     <div className="space-y-4 px-4">
+      {education.map((e) => (
+       <div className="my-1">
+        <div className="flex justify-between">
+         <h3 className="font-bold">{e.formData.university}</h3>
+         <p>{e.formData.location}</p>
+        </div>
+        <div className="flex justify-between">
+         <p>{e.formData.degree}</p>
+         <p>
+          {e.formData.startDate} - {e.formData.endDate}
+         </p>
+        </div>
        </div>
-       <div className="flex justify-between">
-        <p>Bachelor of Arts in Computer Science, Minor in Business</p>
-        <p>Aug. 2018 - May 2021</p>
-       </div>
-      </div>
-      <div>
-       <div className="flex justify-between">
-        <h3 className="font-bold">Blinn College</h3>
-        <p>Bryan, TX</p>
-       </div>
-       <div className="flex justify-between">
-        <p>Associate's in Liberal Arts</p>
-        <p>Aug. 2014 - May 2018</p>
-       </div>
-      </div>
+      ))}
      </div>
     </section>
     {experience && (
      <section className="mb-8">
       <h2 className="text-2xl font-bold text-start">Experience</h2>
-      <span className="w-full h-[2px] bg-gray-500 block my-1"></span>
+      <hr className="mt-4 "></hr>
       <div className="px-4">
        {experience.map((e) => (
-        <div className="mb-4 ">
+        <div key={e} className="mb-4 ">
          <div className="flex justify-between">
-          <h3 className="font-bold">{e.positionTitle}</h3>
+          <h3 className="font-bold">{e.formData.positionTitle}</h3>
           <p>
-           {e.startDate} - {e.endDate}
+           {e.formData.startDate} - {e.formData.endDate}
           </p>
          </div>
-         <p className="text-start">{e.companyName}</p>
+         <p className="text-start">{e.formData.companyName}</p>
          <ul className="list-disc pl-12 text-start ">
-          {Object.entries(e.items).map(([key, value]) => (
+          {Object.entries(e.formData.items).map(([key, value]) => (
            <li key={key}>{value}</li>
           ))}
          </ul>
@@ -90,25 +84,20 @@ function Resume({ formData }) {
     {projects && (
      <section className="mb-8">
       <h2 className="text-2xl font-bold text-start">Projects</h2>
-      <span className="w-full h-[2px] bg-gray-500 block my-1"></span>
+      <hr className="mt-4 "></hr>
       <div className="px-4 text-start">
        {projects.map((e) => (
-        <div className="mb-4">
+        <div key={e} className="mb-4">
          <div className="flex justify-between">
           <h3 className="font-bold">
-           {e.projectName}
-           <span className="font-normal">
-            | Python, Flask, React, PostgreSQL, Docker
-           </span>
+           {e.formData.projectName}
+           <span className="font-normal">| {e.formData.techStack}</span>
           </h3>
-          <p>June 2020 -Present</p>
          </div>
-         <ul className="list-disc pl-12">
-          <li>Implemented user authentication and authorization</li>
-          <li>
-           Utilized data visualization libraries to create interactive charts
-           and graphs
-          </li>
+         <ul className="list-disc pl-12 text-start ">
+          {Object.entries(e.formData.items).map(([key, value]) => (
+           <li key={key}>{value}</li>
+          ))}
          </ul>
         </div>
        ))}
@@ -117,12 +106,25 @@ function Resume({ formData }) {
     )}
     <section className="mb-8">
      <h2 className="text-2xl font-bold text-start">Skills</h2>
-     <span className="w-full h-[2px] bg-gray-500 block my-1"></span>
+     <hr className="mt-4 "></hr>
      <div className="flex flex-wrap px-4 mt-3">
-      {/* {skills &&
-       skills.map((skill) => (
-        <span className="px-2 py-1 mr-2 mb-2 bg-gray-200 rounded">{skill}</span>
-       ))} */}
+      <h1 className="font-bold"> Languages: </h1>
+      <span className="w-2" />{" "}
+      {skills.languages && <p>{skills.languages.join(" ,")}</p>}
+     </div>
+     <div className="flex flex-wrap px-4 mt-3">
+      <h1 className="font-bold"> Frameworks: </h1>
+      <span className="w-2" />{" "}
+      {skills.frameworks && <p>{skills.frameworks.join(" ,")}</p>}
+     </div>
+     <div className="flex flex-wrap px-4 mt-3">
+      <h1 className="font-bold"> Developer Tools: </h1>
+      <span className="w-2" />{" "}
+      {skills.devtools && <p>{skills.devtools.join(" ,")}</p>}
+     </div>
+     <div className="flex flex-wrap px-4 mt-3">
+      <h1 className="font-bold"> Libraries: </h1> <span className="w-2" />{" "}
+      {skills.libs && <p>{skills.libs.join(" ,")}</p>}
      </div>
     </section>
    </div>

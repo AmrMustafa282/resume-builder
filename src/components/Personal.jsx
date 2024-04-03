@@ -7,10 +7,8 @@ import { useNavigate } from "react-router-dom";
 const Personal = ({ handelPersonalData }) => {
   const navigate = useNavigate();
  const [formData, setformData] = useState({});
- const handelOnChange = (key, value) => {
-  setformData({ ...formData, key: value });
- };
- // console.log(formData)
+ 
+
  return (
   <>
    <div className="h-[90vh]  flex flex-col justify-center gap-12  mx-auto  container">
@@ -55,7 +53,7 @@ const Personal = ({ handelPersonalData }) => {
     </div>
        <Button onClick={() => {
          handelPersonalData(formData)
-          navigate('/experience')
+          navigate('/education')
        }}>Next</Button>
    </div>
   </>
