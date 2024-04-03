@@ -73,14 +73,14 @@ const Educations = ({ handelEducationData, data }) => {
      />
      <Input
       onChange={(e) => setformData({ ...formData, startDate: e.target.value })}
-      placeholder="Start Date"
+      placeholder="Start Date (May 2024)"
       type="text"
       className="col-span-1 "
       ref={start}
      />
      <Input
       onChange={(e) => setformData({ ...formData, endDate: e.target.value })}
-      placeholder="End Date"
+      placeholder="End Date (Aug 2024)"
       type="text"
       className="col-span-1 "
       ref={end}
