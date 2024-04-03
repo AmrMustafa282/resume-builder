@@ -3,36 +3,29 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useNavigate } from "react-router-dom";
 
-const Experience = ({ setExperienceArray }) => {
+const Projects = ({ setProjectsArray }) => {
  const navigate = useNavigate();
  const [formData, setformData] = useState({});
  const [items, setItems] = useState({});
 
-
- const title = useRef(null);
  const name = useRef(null);
- const start = useRef(null);
- const end = useRef(null);
+ const tech = useRef(null);
  const iOne = useRef(null);
  const iTwo = useRef(null);
  const iThree = useRef(null);
  const iFour = useRef(null);
 
  const handelSubmit = () => {
-   // setformData({ ...formData, items: items });
-   formData.items = items;
-  //  handelExperiencelData(formData);
-  setExperienceArray((prev) => [...prev, formData]);
-  //  console.log(formData)
-  //  navigate('/projects')
+ 
+  formData.items = items;
+  setProjectsArray((prev) => [...prev, formData]);
+
  };
- //  console.log(items)
+ 
 
  const clear = () => {
-  title.current.value = "";
   name.current.value = "";
-  start.current.value = "";
-  end.current.value = '';
+  tech.current.value = "";
   iOne.current.value = "";
   iTwo.current.value = "";
   iThree.current.value = "";
@@ -41,64 +34,51 @@ const Experience = ({ setExperienceArray }) => {
  return (
   <>
    <div className="h-[90vh]  flex flex-col justify-center gap-12  mx-auto  container">
-    <h1 className="text-center text-4xl font-bold">Profiessional Experience</h1>
+    <h1 className="text-center text-4xl font-bold">Projects</h1>
     <div className="grid grid-cols-2 gap-8 w-full mb-6">
      <Input
       onChange={(e) =>
-       setformData({ ...formData, positionTitle: e.target.value })
+       setformData({ ...formData, projectName: e.target.value })
       }
-      placeholder="Position Title"
+      placeholder="Project Name"
       type="text"
-      className="col-span-1 "
-      ref={title}
-     />
-     <Input
-      onChange={(e) =>
-       setformData({ ...formData, companyName: e.target.value })
-      }
-      placeholder="Company Name"
-      type="text"
-      className="col-span-1 "
+      className="col-span-2 "
       ref={name}
      />
      <Input
-      onChange={(e) => setformData({ ...formData, startDate: e.target.value })}
-      placeholder="Start Date"
+      onChange={(e) =>
+       setformData({ ...formData, techStack: e.target.value })
+      }
+      placeholder="Tech Stack (Python, Flask, React, PostgreSQL, Docker)"
       type="text"
-      className="col-span-1 "
-      ref={start}
+      className="col-span-2 "
+      ref={tech}
      />
-     <Input
-      onChange={(e) => setformData({ ...formData, endDate: e.target.value })}
-      placeholder="End Date"
-      type="text"
-      className="col-span-1 "
-      ref={end}
-     />
+
      <Input
       onChange={(e) => setItems({ ...items, one: e.target.value })}
-      placeholder="work summary item"
+      placeholder="project summary item"
       type="text"
       className="col-span-2 "
       ref={iOne}
      />
      <Input
       onChange={(e) => setItems({ ...items, two: e.target.value })}
-      placeholder="work summary item"
+      placeholder="project summary item"
       type="text"
       className="col-span-2 "
       ref={iTwo}
      />
      <Input
       onChange={(e) => setItems({ ...items, three: e.target.value })}
-      placeholder="work summary item"
+      placeholder="project summary item"
       type="text"
       className="col-span-2 "
       ref={iThree}
      />
      <Input
       onChange={(e) => setItems({ ...items, four: e.target.value })}
-      placeholder="work summary item"
+      placeholder="project summary item"
       type="text"
       className="col-span-2 "
       ref={iFour}
@@ -115,11 +95,11 @@ const Experience = ({ setExperienceArray }) => {
      >
       Add
      </Button>
-     <Button onClick={() => navigate('/projects')}>Next</Button>
+     <Button onClick={() => navigate('/skills')}>Next</Button>
     </div>
    </div>
   </>
  );
 };
 
-export default Experience;
+export default Projects;
